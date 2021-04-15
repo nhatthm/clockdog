@@ -1,32 +1,49 @@
-# @nhatthm/{name}
+# Cucumber Clock steps for Golang
 
-<!--
-[![Build Status](https://github.com/nhatthm/{name}/actions/workflows/test.yaml/badge.svg)](https://github.com/nhatthm/{}name/actions/workflows/test.yaml)
-[![codecov](https://codecov.io/gh/nhatthm/{name}/branch/master/graph/badge.svg?token=eTdAgDE2vR)](https://codecov.io/gh/nhatthm/{name})
-[![Go Report Card](https://goreportcard.com/badge/github.com/nhatthm/{name})](https://goreportcard.com/report/github.com/nhatthm/{name})
-[![GoDevDoc](https://img.shields.io/badge/dev-doc-00ADD8?logo=go)](https://pkg.go.dev/github.com/nhatthm/{name})
+[![Build Status](https://github.com/nhatthm/clockdog/actions/workflows/test.yaml/badge.svg)](https://github.com/nhatthm/clockdog/actions/workflows/test.yaml)
+[![codecov](https://codecov.io/gh/nhatthm/clockdog/branch/master/graph/badge.svg?token=eTdAgDE2vR)](https://codecov.io/gh/nhatthm/clockdog)
+[![Go Report Card](https://goreportcard.com/badge/github.com/nhatthm/httpmock)](https://goreportcard.com/report/github.com/nhatthm/httpmock)
+[![GoDevDoc](https://img.shields.io/badge/dev-doc-00ADD8?logo=go)](https://pkg.go.dev/github.com/nhatthm/clockdog)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate/?hosted_button_id=PJZSGJN57TDJY)
--->
 
-TBD
-
-## Prerequisites
-
-- `Go >= 1.14`
-
-## Install
-
-```bash
-go get github.com/nhatthm/{name}
-```
+`clockdog` uses [`nhatthm/go-clock`](https://github.com/nhatthm/go-clock) to provide steps for `cucumber/godog` and
+makes it easy to run tests with `time`.
 
 ## Usage
 
-TBD
+Initiate the clock and register it to the scenario.
 
-## Examples
+```go
+package mypackage
 
-TBA
+import (
+	"testing"
+
+	"github.com/cucumber/godog"
+	"github.com/nhatthm/clockdog"
+)
+
+func TestIntegration(t *testing.T) {
+	clock := clockdog.New()
+	suite := godog.TestSuite{
+		Name:                 "Integration",
+		TestSuiteInitializer: nil,
+		ScenarioInitializer: func(ctx *godog.ScenarioContext) {
+			clock.RegisterContext(ctx)
+		},
+		Options: &godog.Options{
+			Strict:    true,
+			Output:    out,
+			Randomize: rand.Int63(),
+		},
+	}
+	
+	// Inject the clock to your application then run the suite.
+	status := suite.Run()
+}
+```
+
+Read more about [`nhatthm/go-clock`](https://github.com/nhatthm/go-clock)
 
 ## Donation
 
