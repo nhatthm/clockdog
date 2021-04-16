@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/cucumber/godog"
-	clock "github.com/nhatthm/go-clock"
+	"github.com/nhatthm/timeparser"
 )
 
 // RegisterContext registers clock to godog tests.
@@ -34,7 +34,7 @@ func (c *Clock) RegisterContext(ctx *godog.ScenarioContext) {
 }
 
 func (c *Clock) set(t string) error {
-	ts, err := clock.Parse(t)
+	ts, err := timeparser.Parse(t)
 	if err != nil {
 		return err
 	}

@@ -13,7 +13,7 @@ import (
 
 	"github.com/cucumber/godog"
 	"github.com/nhatthm/clockdog"
-	"github.com/nhatthm/go-clock"
+	"github.com/nhatthm/timeparser"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -139,7 +139,7 @@ func isNotNow(c *clockdog.Clock) error {
 }
 
 func expectTime(c *clockdog.Clock, s string) error {
-	expected, err := clock.Parse(s)
+	expected, err := timeparser.Parse(s)
 	if err != nil {
 		return err
 	}
