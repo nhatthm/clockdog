@@ -1,6 +1,7 @@
 package clockdog
 
 import (
+	"context"
 	"strconv"
 	"time"
 
@@ -10,9 +11,11 @@ import (
 
 // RegisterContext registers clock to godog tests.
 func (c *Clock) RegisterContext(ctx *godog.ScenarioContext) {
-	ctx.AfterScenario(func(*godog.Scenario, error) {
+	ctx.After(func(context.Context, *godog.Scenario, error) (context.Context, error) {
 		// Unfreeze the clock.
 		c.Unfreeze()
+
+		return nil, nil
 	})
 
 	ctx.Step(`(?:the )?clock is at "([^"]*)"`, c.set)
