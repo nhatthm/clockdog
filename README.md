@@ -1,3 +1,7 @@
+> ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+>
+> This module is deprecated. Use `github.com/godogx/clocksteps` instead.
+
 # Cucumber Clock steps for Golang
 
 [![GitHub Releases](https://img.shields.io/github/v/release/nhatthm/clockdog)](https://github.com/nhatthm/clockdog/releases/latest)
